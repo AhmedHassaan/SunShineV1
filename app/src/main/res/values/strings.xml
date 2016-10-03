@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">SunShine V1</string>
+    <array name="textTry">
+        <item>Today</item>
+        <item>Tomorrow</item>
+        <item>Weds</item>
+        <item>Thurs</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>onee</item>
+        <item>twooo</item>
+        <item>threee</item>
+    </array>
 </resources>
