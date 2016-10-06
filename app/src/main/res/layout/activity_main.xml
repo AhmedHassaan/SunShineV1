@@ -10,7 +10,7 @@
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="com.example.lenovo.sunshinev1.Main_Fragment"
+        android:name="com.example.lenovo.sunshinev1.data.ForecastFragment"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/fragment" />

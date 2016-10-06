@@ -11,4 +11,6 @@
         <item>twooo</item>
         <item>threee</item>
     </array>
+    
+    <string name="action_refresh" translatable="false">Refresh</string>
 </resources>
