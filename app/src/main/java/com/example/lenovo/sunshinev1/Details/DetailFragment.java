@@ -15,9 +15,15 @@ import com.example.lenovo.sunshinev1.R;
  */
 
 
-public class PlaceholderFragment extends Fragment {
+public class DetailFragment extends Fragment {
 
+    private static final String LOG_TAG = DetailFragment.class.getSimpleName();
     TextView text;
+    private static final String FORECAST_SHARE_HASHTAG = " #SunShineApp";
+    private String forecastStr;
+
+    public DetailFragment(){
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,9 +33,11 @@ public class PlaceholderFragment extends Fragment {
         text = (TextView)rootView.findViewById(R.id.test);
         Intent intent = getActivity().getIntent();
         if(intent != null && intent.hasExtra(Intent.EXTRA_TEXT)){
-            String str = intent.getStringExtra(Intent.EXTRA_TEXT);
-            text.setText(str);
+            forecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
+            text.setText(forecastStr);
         }
         return rootView;
     }
+
+
 }

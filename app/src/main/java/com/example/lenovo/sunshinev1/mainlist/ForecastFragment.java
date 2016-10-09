@@ -1,9 +1,13 @@
 package com.example.lenovo.sunshinev1.MainList;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
@@ -19,8 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.lenovo.sunshinev1.R;
 import com.example.lenovo.sunshinev1.Details.DetailActivity;
+import com.example.lenovo.sunshinev1.R;
 import com.example.lenovo.sunshinev1.Setting.SettingActivity;
 
 import org.json.JSONArray;
@@ -48,6 +52,8 @@ public class ForecastFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     ListView list;
     String[] resultStrs;
+    ProgressDialog progress;
+    private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
     @Nullable
     @Override
@@ -62,6 +68,7 @@ public class ForecastFragment extends Fragment {
         List<String> weekForecast = new ArrayList<>(Arrays.asList(textTry));
         adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item_forecast,
                 R.id.list_item_forecast_textview, weekForecast);
+        updateWeather();
         list=(ListView)rootView.findViewById(R.id.listview_forecast);
         list.setAdapter(adapter);
 
@@ -94,8 +101,7 @@ public class ForecastFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
         if(id == R.id.action_refresh){
-            FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("94043");
+            updateWeather();
             return true;
         }
 
@@ -104,12 +110,42 @@ public class ForecastFragment extends Fragment {
             startActivity(intent);
             return true;
         }
+
+        else if(id == R.id.action_map){
+            openPreferredLocationInMap();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
+    private void openPreferredLocationInMap(){
+        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = sharedprefs.getString(getString(R.string.location_key),getString(R.string.location_def));
+
+        Uri geoLocation = Uri.parse("geo:0,07").buildUpon().appendQueryParameter("q",location).build();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        PackageManager pm = getActivity().getPackageManager();
+        if (intent.resolveActivity(pm) != null) {
+            startActivity(intent);
+        }
+        else{
+            Log.d(LOG_TAG,"Couldn't call " + location + ", no such location !");
+        }
+
+    }
+
+    private void updateWeather(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = prefs.getString(getString(R.string.location_key),getString(R.string.location_def));
+        FetchWeatherTask weatherTask = new FetchWeatherTask();
+        weatherTask.execute(location);
+    }
+
+
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
-        private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+
 
 
         //-----------------
@@ -130,6 +166,16 @@ public class ForecastFragment extends Fragment {
          */
         private String formatHighLows(double high, double low) {
             // For presentation, assume the user doesn't care about tenths of a degree.
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String unitType = sharedPrefs.getString(getString(R.string.units_key),getString(R.string.pref_units_metric));
+            if(unitType.equals(getString(R.string.pref_units_imperial))){
+                high = (high * 1.8) + 32;
+                low = (low * 1.8) + 32;
+            }
+            else if(!unitType.equals(getString(R.string.pref_units_metric))){
+                Log.d(LOG_TAG,"Unit no found : " + unitType);
+            }
+
             long roundedHigh = Math.round(high);
             long roundedLow = Math.round(low);
 
@@ -228,6 +274,7 @@ public class ForecastFragment extends Fragment {
                 adapter.clear();
                 adapter.addAll(result);
             }
+            progress.dismiss();
 
         }
 
@@ -336,5 +383,15 @@ public class ForecastFragment extends Fragment {
 
 
         }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = ProgressDialog.show(getActivity(), "",
+                    "Loading...", true);
+
+        }
     }
+
+
 }

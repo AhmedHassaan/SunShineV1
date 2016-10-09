@@ -16,4 +16,23 @@
     <string name="location_label" translatable="false">Location</string>
     <string name="location_key" translatable="false">location</string>
     <string name="location_def" translatable="false">94043</string>
+    <string name="units_label" translatable="false">Units</string>
+    <string name="units_def" translatable="false">metric</string>
+    <string name="units_key" translatable="false">units</string>
+    <string name="pref_units_label_metric">Metric</string>
+    <string name="pref_units_label_imperial">Imperial</string>
+    <string name="pref_units_imperial" translatable="false">imperial</string>
+    <string name="pref_units_metric" translatable="false">metric</string>
+    <string name="action_map">Map Location</string>
+    <string name="action_share">Share</string>
+
+    <string-array name="pref_units_options">
+        <item>@string/pref_units_label_metric</item>
+        <item>@string/pref_units_label_imperial</item>
+    </string-array>
+
+    <string-array name="pref_units_values">
+        <item>@string/pref_units_metric</item>
+        <item>@string/pref_units_imperial</item>
+    </string-array>
 </resources>

@@ -7,4 +7,11 @@
         android:defaultValue="@string/location_def"
         android:inputType="text"
         android:singleLine="true"/>
+
+    <ListPreference
+        android:title="@string/units_label"
+        android:key="@string/units_key"
+        android:defaultValue="@string/units_def"
+        android:entryValues="@array/pref_units_values"
+        android:entries="@array/pref_units_options"/>
 </PreferenceScreen>
