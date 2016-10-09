@@ -1,4 +1,4 @@
-package com.example.lenovo.sunshinev1.mainlist;
+package com.example.lenovo.sunshinev1.MainList;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

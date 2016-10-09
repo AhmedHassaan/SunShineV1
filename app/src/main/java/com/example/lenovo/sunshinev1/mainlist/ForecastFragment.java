@@ -1,4 +1,4 @@
-package com.example.lenovo.sunshinev1.mainlist;
+package com.example.lenovo.sunshinev1.MainList;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -20,7 +20,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lenovo.sunshinev1.R;
-import com.example.lenovo.sunshinev1.details.DetailActivity;
+import com.example.lenovo.sunshinev1.Details.DetailActivity;
+import com.example.lenovo.sunshinev1.Setting.SettingActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -95,6 +96,12 @@ public class ForecastFragment extends Fragment {
         if(id == R.id.action_refresh){
             FetchWeatherTask weatherTask = new FetchWeatherTask();
             weatherTask.execute("94043");
+            return true;
+        }
+
+        else if(id==R.id.action_settings){
+            Intent intent = new Intent(getActivity(), SettingActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

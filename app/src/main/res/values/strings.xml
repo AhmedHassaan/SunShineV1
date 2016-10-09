@@ -13,4 +13,7 @@
     </array>
 
     <string name="action_refresh" translatable="false">Refresh</string>
+    <string name="location_label" translatable="false">Location</string>
+    <string name="location_key" translatable="false">location</string>
+    <string name="location_def" translatable="false">94043</string>
 </resources>

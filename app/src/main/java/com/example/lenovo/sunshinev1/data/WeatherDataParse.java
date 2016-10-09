@@ -1,4 +1,4 @@
-package com.example.lenovo.sunshinev1.data;
+package com.example.lenovo.sunshinev1.Data;
 
 import org.json.JSONArray;
 import org.json.JSONException;

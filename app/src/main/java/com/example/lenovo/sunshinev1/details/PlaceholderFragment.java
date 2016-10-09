@@ -1,4 +1,4 @@
-package com.example.lenovo.sunshinev1.details;
+package com.example.lenovo.sunshinev1.Details;
 
 import android.content.Intent;
 import android.os.Bundle;

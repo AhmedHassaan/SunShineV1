@@ -4,13 +4,13 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lenovo.sunshinev1.mainlist.MainActivity">
+    tools:context="com.example.lenovo.sunshinev1.MainList.MainActivity">
 
 
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="com.example.lenovo.sunshinev1.mainlist.ForecastFragment"
+        android:name="com.example.lenovo.sunshinev1.MainList.ForecastFragment"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/fragment" />
