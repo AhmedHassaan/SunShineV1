@@ -4,5 +4,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lenovo.sunshinev1.data.DetailActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:context="com.example.lenovo.sunshinev1.details.DetailActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.example.lenovo.sunshinev1.details.PlaceholderFragment"
+        android:id="@+id/fragment2" />
+</FrameLayout>
